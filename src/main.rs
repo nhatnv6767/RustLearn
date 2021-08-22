@@ -12,7 +12,7 @@
     Implement functionality on the box struct to print the characteristics
 */
 
-
+// should create enum, and fn first, impl the 2nd and last is main()
 enum Color {
     Brown,
     Red
