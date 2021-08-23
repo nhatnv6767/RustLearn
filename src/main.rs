@@ -72,5 +72,12 @@ impl ShippingBox {
 
 
 fn main() {
+    let small_dimensions = Dimensions {
+        width: 1.0,
+        height: 2.0,
+        depth: 3.0,
+    };
 
+    let small_box = ShippingBox::new(5.0, Color::Red, small_dimensions);
+    small_box.print();
 }
