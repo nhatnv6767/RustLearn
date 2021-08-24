@@ -6,22 +6,24 @@
 Must use an owned String to store in a struct
 Use &str when passing to a function
 
+Summary
+. Strings are automatically borrowed
+. Use .to_owned() or String::from() to create an owned copy of a string slice
+. Use an owned String when storing in a struct
+
  */
 
-/*
-Here's an example of a struct, and we're attempting to store a string slice within the struct,
-just mentioned, when you create a string in line 2nd after main() "Nhatnv", it's automatically borrowed
-If we try to store borrowed data and structure, it won't compile
-And the reason is when this structure (Employee) is to be dropped at the end of the scope, the structure is responsible for
-cleaning up its own memory. However, since we have borrowed memory (&str), the structure is not allowed to clean it up because it doesn't own this data
-So it results in a compiler error and it'll inform you that you cannot store a string slice in this
- */
 struct Employee {
-    name: &str,
+    name: String,
 }
 
-fn main(){
-    let emp_name = "Nhatnv";
+fn main() {
+    // 2 line the same meaning, that will create owned data and then the own data is transferred into the
+    // employee structure. So the employee then owns that name
+    // And when structure eventually gets dropped near the end of the program or wherever it happens to be dropped,
+    // it will be allowed to clear this memory and therefore the compiler will succeed
+    let emp_name = "Nhatnv".to_owned();
+    let emp_name = String::from("Nhatnv");
     let emp = Employee {
         name: emp_name
     };
