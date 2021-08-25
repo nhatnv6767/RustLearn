@@ -3,6 +3,10 @@ struct LineItem {
     count: i32,
 }
 
+fn print_name(name: &str) {
+    println!("name: {}", name);
+}
+
 fn main() {
     let receipt = vec![
         LineItem {
@@ -16,6 +20,7 @@ fn main() {
     ];
 
     for item in receipt {
-        println!("name: {}, count: {}", item.name, item.count);
+        print_name(&item.name);
+        println!("count: {}", item.count);
     }
 }
