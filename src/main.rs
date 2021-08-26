@@ -22,6 +22,10 @@ struct Person {
     age: i32,
 }
 
+fn print(data: &str) {
+    println!("{}", data);
+}
+
 fn main() {
     // * Create and store at least 3 people in a vector
     let people = vec![
@@ -45,6 +49,8 @@ fn main() {
     for person in people {
         // * Use an if expression to determine which person's info should be printed
         if person.age <= 10 {
+            print(&person.name);
+            print(&person.fav_color);
             // * The name and colors should be printed using a function
         }
 
