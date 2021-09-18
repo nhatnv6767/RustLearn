@@ -30,8 +30,8 @@ fn main() {
     };
 
     match concert {
+        Ticket {price: 50, event} => println!("event @ 50 = {}", event),
         // want to ignore everything else in a structure, use .. (any other fields ignore them)
         Ticket {price, ..} => println!("price = {}", price),
-        Ticket {price: 50, event} => println!("event @ 50 = {}", event),
     }
 }
