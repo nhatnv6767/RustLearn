@@ -9,9 +9,9 @@ struct Ticket {
 }
 
 fn main() {
-    let n = 3;
+    let n = 6;
     match n {
         3 => println!("three"),
-        _ => println!("number: {}", n),
+        other => println!("number: {}", other),
     }
 }
