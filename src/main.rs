@@ -27,7 +27,8 @@ fn get_choice(input: &str) -> Result<MenuChoice, String> {
 fn print_choice(choice: &MenuChoice) {
     println!("choice = {:?}", choice);
 }
-
+// explain: how Rust is able to guarantee that your programs run properly because
+// MenuChoice data is wrapped within a result. And if you try to use it without getting the inner value, you get a compiler error
 fn main() {
     let choice: Result<MenuChoice, _> = get_choice("mainmenu");
     match choice {
