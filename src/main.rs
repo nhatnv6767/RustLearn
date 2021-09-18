@@ -1,5 +1,9 @@
 fn main() {
-    println!("Hello, world!");
+    let numbers = vec![1, 2, 3];
+    match numbers.is_empty() {
+        true => println!("no numbers"),
+        false => println!("has numbers"),
+    }
 }
 
 // terminal : rustup doc
