@@ -3,23 +3,25 @@ enum Option<T> {
     None,
 }
 
-struct Customer {
-    age: Option<i32>,
-    email: String,
+struct GroceryItem {
+    name: String,
+    qty: i32,
+}
+
+fn find_quantity(name: &str) -> Option<i32> {
+    let groceries = vec![
+        GroceryItem { name: "hahahah".to_owned(), qty: 4, },
+        GroceryItem { name: "namamamnj".to_owned(), qty: 12, },
+        GroceryItem { name: "LOLOLHKKK".to_owned(), qty: 7, },
+    ];
+    for item in groceries {
+        if item.name == name {
+            return Some(item.qty);
+        }
+    }
+    None
 }
 
 fn main() {
-    let mark = Customer {
-        age: Some(22),
-        email: "mark@gmail.com".to_owned(),
-    };
-    let becky = Customer {
-        age: None,
-        email: "becky@gmail.com".to_owned(),
-    };
 
-    match becky.age {
-        Some(age) => println!("Customer is {} years old", age),
-        None => println!("Customer age not provided"),
-    }
 }
