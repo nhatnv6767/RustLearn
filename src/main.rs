@@ -13,5 +13,6 @@
 //   * Try searching for: to_uppercase, to_lowercase
 
 fn main() {
-
+    let new_year = "tschüß";
+    println!("{}", new_year.to_uppercase())
 }
