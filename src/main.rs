@@ -7,6 +7,8 @@ we're going to use an enumeration for each menu choice and we will utilize a fun
 returns a results in order to transform the user input into the enumeration
 */
 
+// to allow to print out these variants on the terminal without having to manually match on each one
+#[derive(Debug)]
 enum MenuChoice {
     MainMenu,
     Start,
@@ -23,5 +25,6 @@ fn get_choice(input: &str) -> Result<MenuChoice, String> {
 }
 
 fn main() {
-    println!("Hello, world!");
+    let choice = get_choice("mainmenu");
+    println!("choice = {:?}", choice);
 }
