@@ -8,4 +8,10 @@ struct Ticket {
     price: i32,
 }
 
-fn main() {}
+fn main() {
+    let n = 3;
+    match n {
+        3 => println!("three"),
+        _ => println!("number: {}", n),
+    }
+}
