@@ -6,7 +6,7 @@ struct Survey {
 
 fn main() {
     let response = Survey {
-        q1: Some(12),
+        q1: None,
         q2: Some(true),
         q3: Some("A".to_owned()),
     };
