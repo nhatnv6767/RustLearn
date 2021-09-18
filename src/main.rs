@@ -16,3 +16,5 @@ fn add(a: i32, b: i32) -> i32 {
 fn main() {
     println!("Hello, world!");
 }
+
+// Guide: To generate - go to terminal in IDE: cargo doc --open
