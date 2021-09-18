@@ -19,8 +19,8 @@
 // * All tickets include the price
 enum Ticket {
     // price first and then any additional information
-    Standard(f64, String),
-    Backstage(f64),
+    Backstage(f64, String),
+    Standard(f64),
     Vip(f64, String),
 }
 
