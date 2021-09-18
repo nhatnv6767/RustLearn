@@ -7,6 +7,20 @@ we're going to use an enumeration for each menu choice and we will utilize a fun
 returns a results in order to transform the user input into the enumeration
 */
 
+enum MenuChoice {
+    MainMenu,
+    Start,
+    Quit,
+}
+// inside Result is Ok and Err
+fn get_choice(input: &str) -> Result<MenuChoice, String> {
+    match input {
+        "mainmenu" => Ok(MenuChoice::MainMenu),
+        "start" => Ok(MenuChoice::Start),
+        "quit" => Ok(MenuChoice::Quit),
+        _ => Err("Menu choice not found".to_owned()),
+    }
+}
 
 fn main() {
     println!("Hello, world!");
