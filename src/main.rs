@@ -29,7 +29,9 @@ fn print_choice(choice: &MenuChoice) {
 }
 
 fn main() {
-    let choice = get_choice("mainmenu");
-    print_choice(&choice);
-    // println!("choice = {:?}", choice);
+    let choice: Result<MenuChoice, _> = get_choice("mainmenu");
+    match choice {
+        Ok(inner_choice) => print_choice(&inner_choice),
+        Err(e) => println!("error = {}", e),
+    }
 }
