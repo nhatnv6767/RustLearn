@@ -27,12 +27,18 @@ fn get_choice(input: &str) -> Result<MenuChoice, String> {
 fn print_choice(choice: &MenuChoice) {
     println!("choice = {:?}", choice);
 }
-// explain: how Rust is able to guarantee that your programs run properly because
-// MenuChoice data is wrapped within a result. And if you try to use it without getting the inner value, you get a compiler error
+
+fn pick_choice(input: &str) -> Result<(), String> {
+    // the ? will automatically perform a match operation and happen is if the result is an OK
+    // then that inner data will get placed into the choice
+    // If it's the error var, the error is going to get automatically returned as the error
+    // shorter than use match block to check each one
+    let choice = get_choice(input)?;
+    print_choice(&choice);
+    Ok(())
+}
+
+
 fn main() {
-    let choice: Result<MenuChoice, _> = get_choice("mainmenu");
-    match choice {
-        Ok(inner_choice) => print_choice(&inner_choice),
-        Err(e) => println!("error = {}", e),
-    }
+    pick_choice("start");
 }
