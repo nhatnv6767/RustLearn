@@ -14,4 +14,12 @@ fn main() {
         3 => println!("three"),
         other => println!("number: {}", other),
     }
+
+    let flat = Discount::Flat(2);
+    match flat {
+        Discount::Flat(2) => println!("flat discount is 2"),
+        Discount::Flat(amount) => println!("flat discount of {}", amount),
+        // ignore it, return nothing
+        _ => (),
+    }
 }
