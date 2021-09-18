@@ -16,10 +16,22 @@ fn main() {
     }
 
     let flat = Discount::Flat(2);
+    // match on enum
     match flat {
         Discount::Flat(2) => println!("flat discount is 2"),
         Discount::Flat(amount) => println!("flat discount of {}", amount),
         // ignore it, return nothing
         _ => (),
+    }
+
+    let concert = Ticket {
+        event: "concert".to_owned(),
+        price: 50,
+    };
+
+    match concert {
+        // want to ignore everything else in a structure, use .. (any other fields ignore them)
+        Ticket {price, ..} => println!("price = {}", price),
+        Ticket {price: 50, event} => println!("event @ 50 = {}", event),
     }
 }
