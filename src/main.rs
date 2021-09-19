@@ -22,6 +22,51 @@
 // * Print whether the employee may access the building
 //   * Must use a function that utilizes the question mark operator to do this
 
+// * Use an enum to represent all types of employees
+enum Position {
+    Maintenance,
+    Marketing,
+    Manager,
+    LineSupervisor,
+    KitchenStaff,
+    AssemblyTech,
+}
+enum Status {
+    Active,
+    Terminated,
+}
+
+// * Use a struct to store the employee type and whether they are
+//   still employed
+struct Employee {
+    position: Position,
+    status: Status,
+}
+
+// * Use a function that returns a Result to determine if the employee
+//   may enter the building
+fn try_access(employee: &Employee) -> Result<(), String> {
+    match employee.status {
+        Status::Terminated => Err("Terminated".to_string()),
+        _ => (),
+    }
+
+    match employee.position {
+        Position::Maintenance => Ok(()),
+        Position::Marketing => Ok(()),
+        Position::Manager => Ok(()),
+        _ => Err("invalid position".to_owned()),
+    }
+}
+
+// * Print whether the employee may access the building
+//   * Must use a function that utilizes the question mark operator to do this
+fn print_access(employee: &Employee) -> Result<(), String> {
+    let attempt_access = try_access(employee)?;
+    println!("Access ok");
+    Ok(())
+}
+
 fn main() {
     println!("Hello, world!");
 }
