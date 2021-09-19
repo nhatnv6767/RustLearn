@@ -47,7 +47,7 @@ struct Employee {
 //   may enter the building
 fn try_access(employee: &Employee) -> Result<(), String> {
     match employee.status {
-        Status::Terminated => Err("Terminated".to_string()),
+        Status::Terminated => return Err("Terminated".to_owned()),
         _ => (),
     }
 
