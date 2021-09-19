@@ -19,4 +19,21 @@ fn get_input() -> io::Result<String>{
     Ok(buffer.trim().to_owned())
 }
 
-fn main() {}
+fn main() {
+    let mut all_input = vec![];
+    let mut times_input = 0;
+    while times_input < 2 {
+        match get_input() {
+            // word user type
+            Ok(words) => {
+                all_input.push(words);
+                times_input += 1;
+            }
+            Err(e) => println!("error: {}", e),
+        }
+    }
+
+    for input in all_input {
+        println!("Original: {}, capitalized: {}", input, input.to_uppercase());
+    }
+}
