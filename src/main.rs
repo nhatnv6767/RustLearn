@@ -13,6 +13,25 @@
 // Notes:
 // * Use a HashMap for the furniture store stock
 
+use std::collections::HashMap;
+
 fn main() {
-    println!("Hello, world!");
+    let mut stock = HashMap::new();
+    stock.insert("Chair", 5);
+    stock.insert("Bed", 3);
+    stock.insert("Table", 2);
+    stock.insert("Couch", 0);
+
+    for (item, qty) in stock.iter() {
+        let stock_count = if qty == 0 {
+            "out of stock".to_owned()
+        } else {
+            // it's similar to the print line macro, except instead of printing the line
+            // on the console, it's just going to put it into a string instead
+            // instead of printing it and just throwing everything away, we can save it
+            // into a variable (saving it into the stock_count that we can use it later)
+            format!("{:?}", qty)
+        };
+        println!("item = {}, stock = {}", item, stock_count);
+    }
 }
