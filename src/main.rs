@@ -39,3 +39,8 @@ fn main() {
 
     println!("Total stock = {}", total_stock);
 }
+
+/* explain bug: because when you iterate through a hashmap, automatically borrowed.
+so all we need to do is borrow 0 (&0)
+
+ */
