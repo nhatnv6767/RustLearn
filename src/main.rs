@@ -62,6 +62,7 @@ fn try_access(employee: &Employee) -> Result<(), String> {
 // * Print whether the employee may access the building
 //   * Must use a function that utilizes the question mark operator to do this
 fn print_access(employee: &Employee) -> Result<(), String> {
+    // ? when you're using the questionmark operator is that your function must return a result
     let attempt_access = try_access(employee)?;
     println!("Access ok");
     Ok(())
