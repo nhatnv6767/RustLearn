@@ -68,5 +68,12 @@ fn print_access(employee: &Employee) -> Result<(), String> {
 }
 
 fn main() {
-    println!("Hello, world!");
+    let manager = Employee {
+        position: Position::Manager,
+        status: Status::Active,
+    };
+    match print_access(&manager) {
+        Err(e) => println!("Access denied: {:?}", e),
+        _ => (),
+    }
 }
