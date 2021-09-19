@@ -16,7 +16,7 @@ fn main() {
     people.remove("Susan");
 
     match people.get("Ed") {
-        Some(age) => println!("age = {:?}", age);
+        Some(age) => println!("age = {:?}", age),
         None => println!("not found"),
     }
 }
