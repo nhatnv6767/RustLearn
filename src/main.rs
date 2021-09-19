@@ -13,7 +13,7 @@
 
 // * Use a struct to store at least the age of a customer
 struct Customer {
-    age: i32
+    age: i32,
 }
 
 // * Use a function to determine if a customer can make a restricted purchase
@@ -29,7 +29,8 @@ fn try_purchase(customer: &Customer) -> Result<(), String> {
     }
 }
 
-
 fn main() {
-    println!("Hello, world!");
+    let ashley = Customer { age: 20 };
+    let purchased = try_purchase(&ashley);
+    println!("{:?}", purchased);
 }
