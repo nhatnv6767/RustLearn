@@ -32,3 +32,11 @@ fn main() {
         println!("age = {}", age);
     }
 }
+
+
+/*
+- Store information as key-value pairs
+    - "Key" is used to access the "value"
+- Very fast to insert and find data using the key
+- Useful when you need to find information and know exactly where it is (via the key)
+ */
