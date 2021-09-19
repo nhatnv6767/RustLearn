@@ -22,8 +22,10 @@ fn main() {
     stock.insert("Table", 2);
     stock.insert("Couch", 0);
 
+    let mut total_stock = 0;
     for (item, qty) in stock.iter() {
-        let stock_count = if qty == 0 {
+        total_stock = total_stock + qty;
+        let stock_count = if qty == &0 {
             "out of stock".to_owned()
         } else {
             // it's similar to the print line macro, except instead of printing the line
@@ -34,4 +36,6 @@ fn main() {
         };
         println!("item = {}, stock = {}", item, stock_count);
     }
+
+    println!("Total stock = {}", total_stock);
 }
