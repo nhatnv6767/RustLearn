@@ -40,13 +40,14 @@ impl PowerState {
     // Option (Some and None)
     fn new(state: &str) -> Option<PowerState> {
         let state = state.trim().to_lowercase();
-        match state {
+        // String -> &str
+        match state.as_str() {
             "off" => Some(PowerState::Off),
             "sleep" => Some(PowerState::Sleep),
             "reboot" => Some(PowerState::Reboot),
             "shutdown" => Some(PowerState::Shutdown),
             "hibernate" => Some(PowerState::Hibernate),
-            _ = None
+            _ => None
         }
     }
 }
