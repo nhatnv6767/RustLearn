@@ -49,4 +49,21 @@ impl PowerState {
     }
 }
 
+// * Use a function with a match expression to print out the power messages
+//   * The function should accept the enum as an input
+fn print_power_action(state: PowerState) {
+    // it uses modules from the standard library and you can also utilize it
+    // for using different items that are available in other parts of code
+    // take everything in PowerState and use in this function
+    use PowerState::*;
+    match state {
+        Off => println!("Turning off"),
+        Sleep => println!("Sleeping"),
+        Reboot => println!("Rebooting"),
+        Shutdown => println!("Shutting down"),
+        Hibernate => println!("Hibernating"),
+    }
+
+}
+
 fn main() {}
