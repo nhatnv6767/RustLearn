@@ -23,6 +23,8 @@
 // * The program should be case-insensitive (the user should be able to type
 //   Reboot, reboot, REBOOT, etc.)
 
+use std::io;
+
 // * Use an enum to store the possible power states
 enum PowerState {
     Off,
@@ -66,4 +68,19 @@ fn print_power_action(state: PowerState) {
 
 }
 
-fn main() {}
+fn main() {
+    let mut buffer = String::new();
+    // dont need to use ? after
+    let user_input_status = io::stdin().read_line((&mut buffer));
+    // ok here is defined on results and the read_line returns a result
+    if user_input_status.is_ok() {
+        // the buffer in after main is a owned string and the powerstate new function
+        // require a borrwed
+        match PowerState::new(&buffer) {
+            Some(state) => print_power_action(state),
+            None => println!("Invalid power state"),
+        }
+    } else {
+        println!("Error reading input");
+    }
+}
