@@ -18,4 +18,32 @@
 // * Create your program starting at level 1. Once finished, advance to the
 //   next level.
 
+struct Bill {
+    name: String,
+    amount: f64,
+}
+
+struct Bills {
+    // inner just means we're taking the inner value of the bills [1]
+    inner: Vec<Bill>
+}
+
+impl Bills {
+    fn new() -> Self {
+        Self {
+            inner: vec![]
+        }
+    }
+    // self : Bills structure was created somewhere else and we're just calling
+    // a function implemented on
+    fn add(&mut self, bill: Bill) {
+        self.inner.push(bill);
+    }
+    // &Vec: we can return a borrowed vector in this case since it's already created in line [1]
+    // and we can just borrow
+    fn get_all(&self) -> &Vec<Bill> {
+        &self.inner
+    }
+}
+
 fn main() {}
