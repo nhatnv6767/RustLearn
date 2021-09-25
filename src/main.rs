@@ -18,6 +18,8 @@
 // * Create your program starting at level 1. Once finished, advance to the
 //   next level.
 
+use std::io;
+
 struct Bill {
     name: String,
     amount: f64,
@@ -46,4 +48,16 @@ impl Bills {
     }
 }
 
-fn main() {}
+fn get_input() -> String {
+    let mut buffer = String::new();
+    while io::stdin().read_line(&mut buffer).is_err() {
+        println!("Please enter your data again.");
+    }
+    buffer.trim().to_owned();
+}
+
+fn main() {
+    loop {
+
+    }
+}
