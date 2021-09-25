@@ -56,6 +56,21 @@ fn get_input() -> String {
     buffer.trim().to_owned();
 }
 
+fn get_bill_amount() -> f64 {
+    println!("Amount:");
+    loop {
+        let input = get_input();
+        // when you pass something, parsing just converts it from one format to another
+        // convert string into a float
+        // go to docs of RUST to read about parse to know the return value
+        let parsed_input: Result<f64, _> = input.parse();
+        match parsed_input {
+            Ok(amount) => return amount,
+            Err(_) => println!("Please enter a number!"),
+        }
+    }
+}
+
 fn add_bill_menu(bills: &mut Bills) {
     // get the bill name
     let name = get_input();
