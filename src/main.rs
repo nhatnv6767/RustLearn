@@ -65,12 +65,13 @@ fn get_bill_amount() -> f64 {
         let parsed_input: Result<f64, _> = input.parse();
         match parsed_input {
             Ok(amount) => return amount,
-            Err(_) => println!("Please enter a number!"),
+            Err(_) => println!("Wrong type!. Please enter a number."),
         }
     }
 }
 
 fn add_bill_menu(bills: &mut Bills) {
+    println!("Bill name");
     // get the bill name
     let name = get_input();
     // get the bill amount
@@ -80,7 +81,7 @@ fn add_bill_menu(bills: &mut Bills) {
     println!("Bill added");
 }
 
-fn view_bill_menu(bills: &Bills) {
+fn view_bills_menu(bills: &Bills) {
     for bill in bills.get_all() {
         println!("{:?}", bill);
     }
@@ -103,7 +104,7 @@ fn main_menu() {
         let input = get_input();
         match input.as_str() {
             "1" => add_bill_menu(&mut bills),
-            "2" => view_bill_menu(&bills),
+            "2" => view_bills_menu(&bills),
             _ => break,
         }
     }
