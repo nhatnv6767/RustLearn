@@ -56,6 +56,12 @@ impl Bills {
         }
         return bills
     }
+
+    fn remove(&mut self, name: &str) -> bool {
+        // go to docs: returns true if the option is a Some value
+        // if we remove this we will get an optional value back
+        self.inner.remove(name).is_some()
+    }
 }
 
 fn get_input() -> String {
@@ -97,6 +103,11 @@ fn remove_bill_menu(bills: &mut Bills) {
         println!("{:?}", bill);
     }
     let input = get_input();
+    if bills.remove(&input) {
+        println!("Removed");
+    } else {
+        println!("Bill not found")
+    }
 }
 
 fn view_bills_menu(bills: &Bills) {
