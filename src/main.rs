@@ -27,14 +27,12 @@ struct Bill {
 
 struct Bills {
     // inner just means we're taking the inner value of the bills [1]
-    inner: Vec<Bill>
+    inner: Vec<Bill>,
 }
 
 impl Bills {
     fn new() -> Self {
-        Self {
-            inner: vec![]
-        }
+        Self { inner: vec![] }
     }
     // self : Bills structure was created somewhere else and we're just calling
     // a function implemented on
@@ -75,6 +73,10 @@ fn add_bill_menu(bills: &mut Bills) {
     // get the bill name
     let name = get_input();
     // get the bill amount
+    let amount = get_bill_amount();
+    let bill = Bill { name, amount };
+    bills.add(bill);
+    println!("Bill added");
 }
 
 fn main_menu() {
