@@ -19,6 +19,7 @@
 //   next level.
 
 use std::io;
+use std::collections::HashMap;
 
 #[derive(Debug)]
 struct Bill {
@@ -28,7 +29,7 @@ struct Bill {
 
 struct Bills {
     // inner just means we're taking the inner value of the bills [1]
-    inner: Vec<Bill>,
+    inner: HashMap<String, Bill>,
 }
 
 impl Bills {
@@ -38,12 +39,22 @@ impl Bills {
     // self : Bills structure was created somewhere else and we're just calling
     // a function implemented on
     fn add(&mut self, bill: Bill) {
-        self.inner.push(bill);
+        self.inner.insert(bill.name.clone(), bill);
     }
     // &Vec: we can return a borrowed vector in this case since it's already created in line [1]
     // and we can just borrow
-    fn get_all(&self) -> &Vec<Bill> {
-        &self.inner
+    fn get_all(&self) -> Vec<Bill> {
+        // the reason remove & that is we're creating the bills vector
+        // so if we try to return a borrowed vector instead
+        // the problem with that is the vector is created and this function owned that vector
+        // and what's going to happen is this function is responsible for deleting all the data
+        // that it created
+        // which means it's going to immediately delete the vector
+        let mut bills = vec![];
+        for bill in self.bills.values(){
+            bills.push(bill.clone());
+        }
+        return bills
     }
 }
 
