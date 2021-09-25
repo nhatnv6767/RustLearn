@@ -79,24 +79,32 @@ impl Bills {
     }
 }
 
-fn get_input() -> String {
+fn get_input() -> Option<String> {
     let mut buffer = String::new();
     while io::stdin().read_line(&mut buffer).is_err() {
         println!("Please enter your data again.");
     }
-    return buffer.trim().to_owned();
+    let input = buffer.trim().to_owned();
+    if &input == "" {
+        None
+    } else {
+        Some(input)
+    }
 }
 
-fn get_bill_amount() -> f64 {
+fn get_bill_amount() -> Option<f64> {
     println!("Amount:");
     loop {
         let input = get_input();
+        if &input == "" {
+            return None;
+        }
         // when you pass something, parsing just converts it from one format to another
         // convert string into a float
         // go to docs of RUST to read about parse to know the return value
         let parsed_input: Result<f64, _> = input.parse();
         match parsed_input {
-            Ok(amount) => return amount,
+            Ok(amount) => return Some(amount),
             Err(_) => println!("Wrong type!. Please enter a number."),
         }
     }
