@@ -56,6 +56,12 @@ fn get_input() -> String {
     buffer.trim().to_owned();
 }
 
+fn add_bill_menu(bills: &mut Bills) {
+    // get the bill name
+    let name = get_input();
+    // get the bill amount
+}
+
 fn main_menu() {
     // can call show function only within the main_menu
     fn show() {
@@ -81,6 +87,6 @@ fn main_menu() {
 
 fn main() {
     loop {
-
+        main_menu(); // 1st
     }
 }
