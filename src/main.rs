@@ -113,9 +113,15 @@ fn get_bill_amount() -> Option<f64> {
 fn add_bill_menu(bills: &mut Bills) {
     println!("Bill name");
     // get the bill name
-    let name = get_input();
+    let name = match get_input() {
+        Some(input) => input,
+        None => return,
+    };
     // get the bill amount
-    let amount = get_bill_amount();
+    let amount = match get_bill_amount() {
+        Some(amount) => amount,
+        None => return,
+    };
     let bill = Bill { name, amount };
     bills.add(bill);
     println!("Bill added");
@@ -127,7 +133,10 @@ fn remove_bill_menu(bills: &mut Bills) {
     }
 
     println!("Enter bill name to remove:");
-    let input = get_input();
+    let input = match get_input() {
+        Some(input) => input,
+        None => return,
+    };
     if bills.remove(&input) {
         println!("Removed");
     } else {
@@ -141,8 +150,14 @@ fn update_bill_menu(bills: &mut Bills) {
     }
 
     println!("Enter bill name to update:");
-    let name = get_input();
-    let amount = get_bill_amount();
+    let name = match get_input() {
+        Some(name) => name,
+        None => return,
+    };
+    let amount = match get_bill_amount() {
+        Some(amount) => amount,
+        None => return,
+    };
 
     if bills.update(&name, amount) {
         println!("Updated")
