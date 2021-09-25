@@ -104,6 +104,8 @@ fn remove_bill_menu(bills: &mut Bills) {
     for bill in bills.get_all() {
         println!("{:?}", bill);
     }
+
+    println!("Enter bill name to remove:");
     let input = get_input();
     if bills.remove(&input) {
         println!("Removed");
