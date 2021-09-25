@@ -95,7 +95,10 @@ fn get_input() -> Option<String> {
 fn get_bill_amount() -> Option<f64> {
     println!("Amount:");
     loop {
-        let input = get_input();
+        let input = match get_input() {
+            Some(input) => input,
+            None => return None,
+        };
         if &input == "" {
             return None;
         }
@@ -188,7 +191,10 @@ fn main_menu() {
     let mut bills = Bills::new();
     loop {
         show();
-        let input = get_input();
+        let input = match get_input() {
+            Some(input) => input,
+            None => return,
+        };
         match input.as_str() {
             "1" => add_bill_menu(&mut bills),
             "2" => view_bills_menu(&bills),
