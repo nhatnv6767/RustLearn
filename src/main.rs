@@ -52,7 +52,7 @@ fn get_input() -> String {
     while io::stdin().read_line(&mut buffer).is_err() {
         println!("Please enter your data again.");
     }
-    buffer.trim().to_owned();
+    return buffer.trim().to_owned();
 }
 
 fn get_bill_amount() -> f64 {
