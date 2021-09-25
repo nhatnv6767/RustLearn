@@ -20,6 +20,7 @@
 
 use std::io;
 
+#[derive(Debug)]
 struct Bill {
     name: String,
     amount: f64,
@@ -77,6 +78,12 @@ fn add_bill_menu(bills: &mut Bills) {
     let bill = Bill { name, amount };
     bills.add(bill);
     println!("Bill added");
+}
+
+fn view_bill_menu(bills: &Bills) {
+    for bill in bills.get_all() {
+        println!("{:?}", bill);
+    }
 }
 
 fn main_menu() {
