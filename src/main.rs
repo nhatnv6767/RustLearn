@@ -183,7 +183,7 @@ fn main_menu() {
         println!("1. Add bill");
         println!("2. View bills");
         println!("3. Remove bill");
-        println!("4. Update bill");
+        println!("4. Update bill (let blank input if you dont want to update)");
         println!("");
         println!("Enter selection:");
     }
