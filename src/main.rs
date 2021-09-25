@@ -56,6 +56,29 @@ fn get_input() -> String {
     buffer.trim().to_owned();
 }
 
+fn main_menu() {
+    // can call show function only within the main_menu
+    fn show() {
+        println!("");
+        println!("== Manage Bills ==");
+        println!("1. Add bill");
+        println!("2. View bills");
+        println!("");
+        println!("Enter selection:");
+    }
+
+    let mut bills = Bills::new();
+    loop {
+        show();
+        let input = get_input();
+        match input.as_str() {
+            "1" => add_bill_menu(&mut bills),
+            "2" => view_bill_menu(&bills),
+            _ => break,
+        }
+    }
+}
+
 fn main() {
     loop {
 
