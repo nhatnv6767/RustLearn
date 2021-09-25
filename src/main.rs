@@ -64,6 +64,19 @@ impl Bills {
         // if we remove this we will get an optional value back
         self.inner.remove(name).is_some()
     }
+
+    fn update(&mut self, name: &str, amount: f64) -> bool {
+        // get_mut: in the docs -> allows us to mutate the value
+        // if it's not found and this will just be none
+        match self.inner.get_mut(name) {
+            Some(bill) => {
+                // access bill amount of Bill Structure
+                bill.amount = amount;
+                true
+            }
+            None => false
+        }
+    }
 }
 
 fn get_input() -> String {
@@ -114,6 +127,22 @@ fn remove_bill_menu(bills: &mut Bills) {
     }
 }
 
+fn update_bill_menu(bills: &mut Bills) {
+    for bill in bills.get_all() {
+        println!("{:?}", bill);
+    }
+
+    println!("Enter bill name to update:");
+    let name = get_input();
+    let amount = get_bill_amount();
+
+    if bills.update(&name, amount) {
+        println!("Updated")
+    } else {
+        println!("Bill not found")
+    }
+}
+
 fn view_bills_menu(bills: &Bills) {
     for bill in bills.get_all() {
         println!("{:?}", bill);
@@ -128,6 +157,7 @@ fn main_menu() {
         println!("1. Add bill");
         println!("2. View bills");
         println!("3. Remove bill");
+        println!("4. Update bill");
         println!("");
         println!("Enter selection:");
     }
@@ -140,6 +170,7 @@ fn main_menu() {
             "1" => add_bill_menu(&mut bills),
             "2" => view_bills_menu(&bills),
             "3" => remove_bill_menu(&mut bills),
+            "4" => update_bill_menu(&mut bills),
             _ => break,
         }
     }
