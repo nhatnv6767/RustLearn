@@ -18,10 +18,10 @@
 // * Create your program starting at level 1. Once finished, advance to the
 //   next level.
 
-use std::io;
 use std::collections::HashMap;
+use std::io;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Bill {
     name: String,
     amount: f64,
@@ -34,7 +34,9 @@ struct Bills {
 
 impl Bills {
     fn new() -> Self {
-        Self { inner: vec![] }
+        Self {
+            inner: HashMap::new(),
+        }
     }
     // self : Bills structure was created somewhere else and we're just calling
     // a function implemented on
@@ -51,10 +53,10 @@ impl Bills {
         // that it created
         // which means it's going to immediately delete the vector
         let mut bills = vec![];
-        for bill in self.bills.values(){
+        for bill in self.inner.values() {
             bills.push(bill.clone());
         }
-        return bills
+        return bills;
     }
 
     fn remove(&mut self, name: &str) -> bool {
@@ -123,6 +125,7 @@ fn main_menu() {
         println!("== Manage Bills ==");
         println!("1. Add bill");
         println!("2. View bills");
+        println!("3. Remove bill");
         println!("");
         println!("Enter selection:");
     }
@@ -134,6 +137,7 @@ fn main_menu() {
         match input.as_str() {
             "1" => add_bill_menu(&mut bills),
             "2" => view_bills_menu(&bills),
+            "3" => remove_bill_menu(&mut bills),
             _ => break,
         }
     }
