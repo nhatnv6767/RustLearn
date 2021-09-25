@@ -92,6 +92,13 @@ fn add_bill_menu(bills: &mut Bills) {
     println!("Bill added");
 }
 
+fn remove_bill_menu(bills: &mut Bills) {
+    for bill in bills.get_all() {
+        println!("{:?}", bill);
+    }
+    let input = get_input();
+}
+
 fn view_bills_menu(bills: &Bills) {
     for bill in bills.get_all() {
         println!("{:?}", bill);
