@@ -3,5 +3,11 @@ fn add_fn(a: i32, b: i32) -> i32 {
 }
 
 fn main() {
-    let _sum = add(2, 4);
+
+    let _add = |a: i32, b: i32| -> i32 {
+        a + b
+    };
+
+    let _sum = _add(1, 1);
+    println!("{}",_sum);
 }
