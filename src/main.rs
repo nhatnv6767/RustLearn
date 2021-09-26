@@ -8,6 +8,7 @@ fn main() {
         a + b
     };
 
+    let ads = |a, b| a + b;
     let _sum = _add(1, 1);
     println!("{}",_sum);
 }
