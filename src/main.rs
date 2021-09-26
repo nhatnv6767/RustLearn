@@ -28,7 +28,6 @@ struct Bill {
 }
 
 struct Bills {
-    // inner just means we're taking the inner value of the bills [1]
     inner: HashMap<String, Bill>,
 }
 
@@ -38,20 +37,12 @@ impl Bills {
             inner: HashMap::new(),
         }
     }
-    // self : Bills structure was created somewhere else and we're just calling
-    // a function implemented on
+
     fn add(&mut self, bill: Bill) {
         self.inner.insert(bill.name.clone(), bill);
     }
-    // &Vec: we can return a borrowed vector in this case since it's already created in line [1]
-    // and we can just borrow
+
     fn get_all(&self) -> Vec<Bill> {
-        // the reason remove & that is we're creating the bills vector
-        // so if we try to return a borrowed vector instead
-        // the problem with that is the vector is created and this function owned that vector
-        // and what's going to happen is this function is responsible for deleting all the data
-        // that it created
-        // which means it's going to immediately delete the vector
         let mut bills = vec![];
         for bill in self.inner.values() {
             bills.push(bill.clone());
@@ -60,21 +51,16 @@ impl Bills {
     }
 
     fn remove(&mut self, name: &str) -> bool {
-        // go to docs: returns true if the option is a Some value
-        // if we remove this we will get an optional value back
-        self.inner.remove(name).is_some()
+        return self.inner.remove(name).is_some();
     }
 
     fn update(&mut self, name: &str, amount: f64) -> bool {
-        // get_mut: in the docs -> allows us to mutate the value
-        // if it's not found and this will just be none
         match self.inner.get_mut(name) {
             Some(bill) => {
-                // access bill amount of Bill Structure
                 bill.amount = amount;
                 true
             }
-            None => false
+            None => false,
         }
     }
 }
@@ -93,7 +79,7 @@ fn get_input() -> Option<String> {
 }
 
 fn get_bill_amount() -> Option<f64> {
-    println!("Amount:");
+    eprint!("Amount (Blank if you dont want to add new bill):");
     loop {
         let input = match get_input() {
             Some(input) => input,
@@ -102,25 +88,20 @@ fn get_bill_amount() -> Option<f64> {
         if &input == "" {
             return None;
         }
-        // when you pass something, parsing just converts it from one format to another
-        // convert string into a float
-        // go to docs of RUST to read about parse to know the return value
         let parsed_input: Result<f64, _> = input.parse();
         match parsed_input {
             Ok(amount) => return Some(amount),
-            Err(_) => println!("Wrong type!. Please enter a number."),
+            Err(_) => eprint!("Wrong type..Please enter a number!\nAmount: "),
         }
     }
 }
 
 fn add_bill_menu(bills: &mut Bills) {
-    println!("Bill name");
-    // get the bill name
+    eprint!("Bill name (Blank if you dont want to add new bill): ");
     let name = match get_input() {
-        Some(input) => input,
+        Some(name) => name,
         None => return,
     };
-    // get the bill amount
     let amount = match get_bill_amount() {
         Some(amount) => amount,
         None => return,
@@ -130,12 +111,18 @@ fn add_bill_menu(bills: &mut Bills) {
     println!("Bill added");
 }
 
-fn remove_bill_menu(bills: &mut Bills) {
-    for bill in bills.get_all() {
-        println!("{:?}", bill);
+fn check_empty_list(bills: &Bills) -> bool {
+    let list_bills = bills.get_all();
+    if list_bills.is_empty() == false {
+        return true;
+    } else {
+        return false;
     }
+}
 
-    println!("Enter bill name to remove:");
+fn remove_bill_menu(bills: &mut Bills) {
+    view_bills_menu(bills);
+    eprint!("Enter bill name to remove (Blank if you dont want to add new bill): ");
     let input = match get_input() {
         Some(input) => input,
         None => return,
@@ -143,16 +130,14 @@ fn remove_bill_menu(bills: &mut Bills) {
     if bills.remove(&input) {
         println!("Removed");
     } else {
-        println!("Bill not found")
+        println!("Bill not found");
     }
 }
 
 fn update_bill_menu(bills: &mut Bills) {
-    for bill in bills.get_all() {
-        println!("{:?}", bill);
-    }
+    view_bills_menu(bills);
 
-    println!("Enter bill name to update:");
+    eprint!("Enter bill name to update (Blank if you dont want to add new bill): ");
     let name = match get_input() {
         Some(name) => name,
         None => return,
@@ -163,31 +148,34 @@ fn update_bill_menu(bills: &mut Bills) {
     };
 
     if bills.update(&name, amount) {
-        println!("Updated")
+        println!("Updated");
     } else {
-        println!("Bill not found")
+        println!("Bill not found");
     }
 }
 
 fn view_bills_menu(bills: &Bills) {
-    for bill in bills.get_all() {
-        println!("{:?}", bill);
+    let list_bills = bills.get_all();
+    if list_bills.is_empty() == false {
+        for bill in list_bills {
+            println!("{:?}", bill);
+        }
+    } else {
+        println!("Have no list");
     }
 }
 
 fn main_menu() {
-    // can call show function only within the main_menu
     fn show() {
         println!("");
         println!("== Manage Bills ==");
         println!("1. Add bill");
         println!("2. View bills");
         println!("3. Remove bill");
-        println!("4. Update bill (let blank input if you dont want to update)");
+        println!("4. Update bill");
         println!("");
-        println!("Enter selection:");
+        eprint!("Enter selection: ");
     }
-
     let mut bills = Bills::new();
     loop {
         show();
@@ -207,6 +195,6 @@ fn main_menu() {
 
 fn main() {
     loop {
-        main_menu(); // 1st
+        main_menu();
     }
 }
