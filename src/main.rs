@@ -28,7 +28,7 @@ fn find_user(name: &str) -> Option<i32> {
 }
 
 fn main() {
-    let user_name = "sam";
+    let user_name = "nhat";
     let user = find_user(user_name).map(|user_id| User {
         user_id,
         name: user_name.to_owned(),
