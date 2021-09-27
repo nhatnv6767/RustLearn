@@ -9,5 +9,8 @@ fn maybe_word() -> Option<String> {
 fn main() {
     // transformed a string into an integer
     // the word length will be an optional integer
-    let word_length = maybe_word().map(|word| word.len());
+    let word_length = maybe_word()
+        .map(|word| word.len())
+        .map(|len| len * 2);
+
 }
