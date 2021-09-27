@@ -34,6 +34,8 @@ fn main() {
         name: user_name.to_owned(),
     });
     // * Print out the User struct if found, or a "not found" message if not
-
-
+    match user {
+        Some(user) => println!("{:?}", user),
+        None => println!("User not found"),
+    }
 }
