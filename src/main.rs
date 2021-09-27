@@ -18,6 +18,7 @@ struct User {
 /// Locates a user id based on the name.
 fn find_user(name: &str) -> Option<i32> {
     let name = name.to_lowercase();
+
     match name.as_str() {
         "sam" => Some(1),
         "matt" => Some(5),
@@ -26,4 +27,13 @@ fn find_user(name: &str) -> Option<i32> {
     }
 }
 
-fn main() {}
+fn main() {
+    let user_name = "sam";
+    let user = find_user(user_name).map(|user_id| User {
+        user_id,
+        name: user_name.to_owned(),
+    });
+    // * Print out the User struct if found, or a "not found" message if not
+
+
+}
