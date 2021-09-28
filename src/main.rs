@@ -1,27 +1,18 @@
-use unicode_segementation::UnicodeSegementation;
+use std::collections::HashMap;
+
 fn main() {
-    // String: luu o trong heap
-    // UTF-8
-    //
-    // De ta thay duoc no la 1 chuoi cac byte dung canh nhau
-    let s2 = String::from("hkli");
+    // Hashmap
+    let mu = String::from("MU");
+    let mc = String::from("MC");
 
-    // Bytes: Kieu luu tru Bytes
-    for i in s2.bytes() {
-        println!("{}", i);
+    let mut scores = HashMap::new();
+
+    scores.insert(mu, 10);
+    scores.insert(mc, 9);
+
+    for (key, value) in &scores {
+        println!("{} {}", key, value)
     }
 
-    // Scalar value: Kieu vo huong, luu tru nhung ky tu ma no duoc nam rieng ra
-    // tung byte tung byte khac nhau
-    for i in s2.chars() {
-        println!("{}", i);
-    }
 
-    // Grapheme Clusters
-    // 1 so ngon ngu dac biet nhu cua Hindu, khi in ra chars se xuat hien 1 so ky tu la
-    // va no duoc luu o nhung byte dac biet khac, nen can kieu grapheme nay
-    // dung unicode de in ra dong chu hoan chinh
-    for i in s2.graphemes(true) {
-        println!("{}", i)
-    }
 }
