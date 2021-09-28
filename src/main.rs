@@ -5,5 +5,7 @@ fn main() {
     let s2 = String::new();
     let s3 = "A String";
 
+    let s4 = s3.to_string();
+
 
 }
