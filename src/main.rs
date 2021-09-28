@@ -1,13 +1,20 @@
 fn main() {
+    // Vectors bang cach su dung enum
 
-    let mut v = vec![1, 2, 3, 4, 5, 6];
-
-    for i in &mut v {
-        *i += 10;
+    enum SheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String)
     }
 
-    // in ra nhung gia tri trong vector
-    for i in &v {
-        println!("{}", i)
+    let row = vec![
+        SheetCell::Int(5),
+        SheetCell::Float(10.12),
+        SheetCell::Text(String::from("Blue")),
+    ];
+
+    match &row[1] {
+        &SheetCell::Float(i) => println!("{}", i),
+        _ => println!("This is not float"),
     }
 }
