@@ -1,8 +1,10 @@
 fn main() {
     // String: luu o trong heap
     // UTF-8
-    let s1 = String::from("A String");
+    //
+    // De ta thay duoc no la 1 chuoi cac byte dung canh nhau
     let s2 = String::from("");
-    println!("{}", s2 );
-
+    for i in s2.bytes() {
+        println!("{}", i);
+    }
 }
