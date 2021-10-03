@@ -56,5 +56,11 @@ mod test {
         let expected = Some(1);
         assert_eq!(result, expected, "Should be 1");
     }
+    #[test]
+    fn check_concat() {
+        let result = concat("a", "b");
+        let expected = String::from("ab");
+        assert_eq!(result, expected, "Should be placed immediately adjacent");
+    }
 
 }
