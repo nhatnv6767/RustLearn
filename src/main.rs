@@ -5,7 +5,7 @@ fn main() {}
 
 #[cfg(test)]
 mod test {
-    use crate::all_caps;
+    use crate::*;
 
     // a macro, this macro tells the compiler that this function is
     // is testing other code
