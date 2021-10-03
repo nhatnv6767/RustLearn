@@ -1,6 +1,12 @@
+// the hash map would only be available to the main function
+// because the module has its own version of different using statements
+// if want to use hashmap with mod, put like example
+use std::collections::HashMap;
 // modules
 
 mod greet {
+    //
+    use std::collections::HashMap;
     fn hello() {
         println!("Hello");
     }
