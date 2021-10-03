@@ -23,6 +23,13 @@ fn main() {
     // we'll keep that value and if we return false, it will remove that
         .filter(|num| num <= 3)
         .collect();
+
+    let numbers = vec![1, 2, 3, 4, 5];
+    // Optional value because there is the possibility of this number (3) not being in
+    // this vector (vector numbers)
+    let find_me: Option<i32> = numbers
+        .iter()
+        .find(|num| num == 3);
 }
 
 // if we wanted to create another vector with all of these numbers
