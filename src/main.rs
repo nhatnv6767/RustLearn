@@ -30,6 +30,11 @@ fn main() {
     let find_me: Option<i32> = numbers
         .iter()
         .find(|num| num == 3);
+
+    // return the number of elements within the iterator
+    let count = numbers
+        .iter()
+        .count();
 }
 
 // if we wanted to create another vector with all of these numbers
