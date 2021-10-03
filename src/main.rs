@@ -14,6 +14,15 @@ fn main() {
         .map(|num| num + 1)
         // collect simply creates a new vector out of this iterator
         .collect();
+
+    let new_numbers: Vec<_> = numbers
+        .iter()
+    // filter only keep the ones you want
+    // if the number is less than or equal to 3, we will keep it with
+    // filters whenever you return true for a particular number, then
+    // we'll keep that value and if we return false, it will remove that
+        .filter(|num| num <= 3)
+        .collect();
 }
 
 // if we wanted to create another vector with all of these numbers
