@@ -39,6 +39,8 @@ impl Noise for Dog {
     }
 }
 fn main() {
+    // when call hello Person -> the make_noise function in hello will refer to the fn make_noise in the impl Noise for Person
+    // => print out Hello
     hello(Person{});
     hello(Dog {});
 }
