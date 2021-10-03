@@ -44,4 +44,17 @@ mod test {
         let expected = 100;
         assert_eq!(result, expected, "Should be 100");
     }
+    #[test]
+    fn clamp_upper(){
+        let result = clamp(5000, 100, 1000);
+        let expected = 5000;
+        assert_eq!(result, expected, "Should be 1000");
+    }
+    #[test]
+    fn check_div() {
+        let result = div(1,1);
+        let expected = Some(1);
+        assert_eq!(result, expected, "Should be 1");
+    }
+
 }
