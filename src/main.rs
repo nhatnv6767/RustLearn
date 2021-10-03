@@ -37,9 +37,15 @@ fn main() {
         .count();
 
     // return the last element in an iterator
-    let last = numbers
+    // Option: it is possible to create an empty vector
+    // ex: if we remove all the item within the vector and then
+    // try to get the last one, there's nothing to return.
+    // So that's why this one returns an option when working with numbers (vector numbers)
+
+    let last: Option<i32> = numbers
         .iter()
         .last();
+    // it also have min, max, use like last()
 }
 
 // if we wanted to create another vector with all of these numbers
