@@ -44,3 +44,9 @@ fn main() {
     hello(Person{});
     hello(Dog {});
 }
+
+trait Racer {
+    fn go(&self);
+    fn is_ready(&self) -> bool;
+    fn checkpoint(&self, position: i32);
+}
