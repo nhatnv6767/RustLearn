@@ -8,3 +8,6 @@ fn main() {
         plus_one.push(num + 1);
     }
 }
+
+// if we wanted to create another vector with all of these numbers
+// but add one to each number
