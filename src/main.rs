@@ -46,6 +46,15 @@ fn main() {
         .iter()
         .last();
     // it also have min, max, use like last()
+    //
+
+    // it takes some items from the vector and then that's the only one
+    // you'll have.
+    let take: Vec<i32> = numbers
+        .iter()
+        // it will take the first, 2nd, 3rd and others will not
+        .take(3)
+        .collect();
 }
 
 // if we wanted to create another vector with all of these numbers
