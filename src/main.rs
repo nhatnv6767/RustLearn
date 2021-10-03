@@ -2,7 +2,7 @@
 // allow to easily manipulate data and manage options
 //
 fn main() {
-    let a: Option<i32> = Some(1);
+    let a: Option<i32> = None;
     dbg!(a);
     // will check to see if we have some data within our option
     let a_is_some = a.is_some();
