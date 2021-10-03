@@ -35,6 +35,11 @@ fn main() {
     let count = numbers
         .iter()
         .count();
+
+    // return the last element in an iterator
+    let last = numbers
+        .iter()
+        .last();
 }
 
 // if we wanted to create another vector with all of these numbers
