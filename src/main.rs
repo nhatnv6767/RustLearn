@@ -26,8 +26,9 @@ fn clamp(n: i32, lower: i32, upper: i32) -> i32 {
 fn div(a: i32, b: i32) -> Option<i32> {
     if b == 0 {
         return None;
+    } else {
+        Some(a / b)
     }
-    Some(a / b)
 }
 
 /// Takes two strings and places them immediately one after another.
