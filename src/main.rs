@@ -18,9 +18,7 @@
 // * Create your program starting at level 1. Once finished, advance to the
 //   next level.
 
-use std::collections::HashMap;
-use std::io;
-
+use std::{collections::HashMap, io, vec};
 #[derive(Debug, Clone)]
 struct Bill {
     name: String,
@@ -51,7 +49,7 @@ impl Bills {
     }
 
     fn remove(&mut self, name: &str) -> bool {
-        return self.inner.remove(name).is_some();
+        self.inner.remove(name).is_some()
     }
 
     fn update(&mut self, name: &str, amount: f64) -> bool {
@@ -60,7 +58,7 @@ impl Bills {
                 bill.amount = amount;
                 true
             }
-            None => false,
+            None => return false,
         }
     }
 }
@@ -68,7 +66,7 @@ impl Bills {
 fn get_input() -> Option<String> {
     let mut buffer = String::new();
     while io::stdin().read_line(&mut buffer).is_err() {
-        println!("Please enter your data again.");
+        println!("Wrong type. Please enter your data again.");
     }
     let input = buffer.trim().to_owned();
     if &input == "" {
@@ -78,8 +76,74 @@ fn get_input() -> Option<String> {
     }
 }
 
+fn add_bill_menu(bills: &mut Bills) {
+    println!("Bill name: ");
+    let name = match get_input() {
+        Some(input) => input,
+        None => return,
+    };
+
+    let amount = match get_bill_amount() {
+        Some(amount) => amount,
+        None => return,
+    };
+    let bill = Bill { name, amount };
+    bills.add(bill);
+    println!("---------------------------------");
+    for bill in bills.get_all() {
+        println!("{:?}", bill)
+    }
+    println!("---------------------------------");
+    println!("Bill added");
+}
+
+fn remove_bill_menu(bills: &mut Bills) {
+    for bill in bills.get_all() {
+        println!("{:?}", bill)
+    }
+
+    println!("Enter bill name to remove");
+
+    let input = match get_input() {
+        Some(input) => input,
+        None => return,
+    };
+    if bills.remove(&input) {
+        for bill in bills.get_all() {
+            println!("{:?}", bill);
+        }
+        println!("Removed");
+    } else {
+        println!("Bill not found");
+    }
+}
+
+fn update_bill_menu(bills: &mut Bills) {
+    for bill in bills.get_all() {
+        println!("{:?}", bill)
+    }
+    println!("Enter bill name to update");
+    let name = match get_input() {
+        Some(name) => name,
+        None => return,
+    };
+    let amount = match get_bill_amount() {
+        Some(amount) => amount,
+        None => return,
+    };
+
+    if bills.update(&name, amount) {
+        for bill in bills.get_all() {
+            println!("{:?}", bill);
+        }
+        println!("Updated")
+    } else {
+        println!("Bill not found")
+    }
+}
+
 fn get_bill_amount() -> Option<f64> {
-    eprint!("Amount (Blank if you dont want to add new bill):");
+    println!("Amount: ");
     loop {
         let input = match get_input() {
             Some(input) => input,
@@ -91,91 +155,29 @@ fn get_bill_amount() -> Option<f64> {
         let parsed_input: Result<f64, _> = input.parse();
         match parsed_input {
             Ok(amount) => return Some(amount),
-            Err(_) => eprint!("Wrong type..Please enter a number!\nAmount: "),
+            Err(_) => println!("Wrong type. Please enter a number"),
         }
-    }
-}
-
-fn add_bill_menu(bills: &mut Bills) {
-    eprint!("Bill name (Blank if you dont want to add new bill): ");
-    let name = match get_input() {
-        Some(name) => name,
-        None => return,
-    };
-    let amount = match get_bill_amount() {
-        Some(amount) => amount,
-        None => return,
-    };
-    let bill = Bill { name, amount };
-    bills.add(bill);
-    println!("Bill added");
-}
-
-fn check_empty_list(bills: &Bills) -> bool {
-    let list_bills = bills.get_all();
-    if list_bills.is_empty() == false {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-fn remove_bill_menu(bills: &mut Bills) {
-    view_bills_menu(bills);
-    eprint!("Enter bill name to remove (Blank if you dont want to add new bill): ");
-    let input = match get_input() {
-        Some(input) => input,
-        None => return,
-    };
-    if bills.remove(&input) {
-        println!("Removed");
-    } else {
-        println!("Bill not found");
-    }
-}
-
-fn update_bill_menu(bills: &mut Bills) {
-    view_bills_menu(bills);
-
-    eprint!("Enter bill name to update (Blank if you dont want to add new bill): ");
-    let name = match get_input() {
-        Some(name) => name,
-        None => return,
-    };
-    let amount = match get_bill_amount() {
-        Some(amount) => amount,
-        None => return,
-    };
-
-    if bills.update(&name, amount) {
-        println!("Updated");
-    } else {
-        println!("Bill not found");
     }
 }
 
 fn view_bills_menu(bills: &Bills) {
-    let list_bills = bills.get_all();
-    if list_bills.is_empty() == false {
-        for bill in list_bills {
-            println!("{:?}", bill);
-        }
-    } else {
-        println!("Have no list");
+    for bill in bills.get_all() {
+        println!("{:?}", bill);
     }
 }
 
 fn main_menu() {
     fn show() {
-        println!("");
+        println!();
         println!("== Manage Bills ==");
         println!("1. Add bill");
         println!("2. View bills");
         println!("3. Remove bill");
         println!("4. Update bill");
-        println!("");
-        eprint!("Enter selection: ");
+        println!();
+        println!("Enter selection: ");
     }
+
     let mut bills = Bills::new();
     loop {
         show();
@@ -195,6 +197,6 @@ fn main_menu() {
 
 fn main() {
     loop {
-        main_menu();
+        main_menu()
     }
 }
