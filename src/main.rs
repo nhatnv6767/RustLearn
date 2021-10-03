@@ -25,3 +25,10 @@ mod test {
         }
     }
 }
+
+// passed
+// failed
+// ignored
+// measure: measuring the performance
+// filtered out: it's possible to ignore and filter tests based
+// on arguments that you pass to the cargo test coming when you run it
