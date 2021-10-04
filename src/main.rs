@@ -50,3 +50,9 @@ trait Racer {
     fn is_ready(&self) -> bool;
     fn checkpoint(&self, position: i32);
 }
+
+// Recap
+// - Traits define similar functionality for different types
+// - Trait functions are just regular functions
+// + Can accept arguments and return values
+// - Use impl Trait as a function argument to pass data via trait
