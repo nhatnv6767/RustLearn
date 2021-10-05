@@ -4,4 +4,10 @@ fn main() {
         Some(user) => println!("user = {:?}", user),
         None => println!("No user"),
     }
+
+    if let Some(user) = maybe_user {
+        println!("user = {:?}", user);
+    } else {
+        println!("no user");
+    }
 }
