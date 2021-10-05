@@ -20,10 +20,22 @@ struct Square {
     side: i32
 }
 
+impl Perimeter for Square {
+    fn calculate_perimeter(&self) -> i32 {
+        self.side * 4
+    }
+}
+
 struct Triangle {
     side_a: i32,
     side_b: i32,
     side_c: i32,
+}
+
+impl Perimeter for Triangle {
+    fn calculate_perimeter(&self) -> i32 {
+        self.side_a + self.side_b + self.side_c
+    }
 }
 
 fn print_perimeter(shape: impl Perimeter) {
@@ -31,4 +43,13 @@ fn print_perimeter(shape: impl Perimeter) {
     println!("Perimeter = {:?}", perimeter);
 }
 
-fn main() {}
+fn main() {
+    let square = Square {side: 5};
+    let triangle = Triangle {
+        side_a: 2,
+        side_b: 3,
+        side_c: 4
+    };
+    print_perimeter(square);
+    print_perimeter(triangle);
+}
