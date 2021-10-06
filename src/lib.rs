@@ -1,3 +1,3 @@
-fn print_from_lib() {
+pub fn print_from_lib() {
     println!("Hello from lib")
 }
