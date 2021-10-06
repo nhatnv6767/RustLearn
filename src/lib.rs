@@ -7,4 +7,5 @@ pub fn print_from_lib() {
 
     println!("Hello from lib");
     print_from_helper();
+    group::g1::g1_hello();
 }
