@@ -25,4 +25,12 @@ impl Default for Package {
         Self { weight: 3.0 }
     }
 }
-fn main() {}
+fn main() {
+    // if you have a new function that does not have any function arguments,
+    // then you'd want to use default instead of new (new)
+    // However, in our case, since we can specify the weight when we create a new box
+    // it makes sense to have a new function and a default function
+    // where the new function specifies the weight and the default just gives you a predetermined weight
+    let p = Package::default();
+
+}
