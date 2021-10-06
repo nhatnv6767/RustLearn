@@ -13,5 +13,5 @@ use chrono::prelude::*;
 
 fn main() {
     let local: DateTime<Local> = Local::now(); // e.g. `2014-11-28T21:45:59.324310806+09:00`
-    println!("{:?}", local);
+    println!("{:?}", local.format("%Y-%m-%d %H:%M:%S").to_string());
 }
