@@ -1,5 +1,6 @@
 // helper.rs <same name>, <same directory>
 mod helper;
+mod group;
 
 pub fn print_from_lib() {
     use helper::{print_from_helper, print_again};
