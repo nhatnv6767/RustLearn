@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 // Project 2: Contact manager
 //
 // User stories:
@@ -24,5 +26,17 @@
 //   to the next level.
 // * Make your program robust: there are 7 errors & multiple blank lines
 //   present in the data.
+
+#[derive(Debug)]
+struct Record {
+    id: i64,
+    name: String,
+    email: Option<String>
+}
+
+#[derive(Debug)]
+struct Records {
+    inner: HashMap<i64, Record>
+}
 
 fn main() {}
