@@ -1,3 +1,5 @@
+use std::fmt::Result;
+
 // Topic: New type pattern
 //
 // Requirements:
@@ -29,8 +31,13 @@ enum Color {
 struct ShirtColor(Color);
 
 impl ShirtColor {
-    fn new(color: Color) -> Self{
-        Self(color)
+    fn new(color: Color) -> Result<Self, String>{
+
+        match color {
+            Color::Purple => Err("Purple not allowed".to_string()),
+            other => Ok(Self(other))
+        }
+
     }
 }
 
@@ -70,13 +77,13 @@ fn print_pants_color(color: PantsColor) {
 }
 
 fn main() {
-    let shirt_color = ShoesColor::new(Color::Gray);
+    let shirt_color = ShirtColor::new(Color::Purple);
     let pants_color = PantsColor::new(Color::Blue);
     let shoes_color = ShoesColor::new(Color::White);
 
-    print_shirt_color(shoes_color);
+    print_shirt_color(shirt_color);
     print_pants_color(pants_color);
-    print_shoes_color(shirt_color);
+    print_shoes_color(shoes_color);
 }
 
 
