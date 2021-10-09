@@ -10,6 +10,7 @@
 // * Create a function for each type of clothes (shoes, shirt, pants)
 //   that accepts the new type specific to that type of clothing
 
+#[derive(Debug)]
 enum Color {
     Black,
     Blue,
@@ -24,6 +25,7 @@ enum Color {
 }
 
 // tuple structure, can be accessed with a .zero
+#[derive(Debug)]
 struct ShirtColor(Color);
 
 impl ShirtColor {
@@ -31,6 +33,8 @@ impl ShirtColor {
         Self(color)
     }
 }
+
+#[derive(Debug)]
 struct ShoesColor(Color);
 
 impl ShoesColor {
@@ -38,6 +42,8 @@ impl ShoesColor {
         Self(color)
     }
 }
+
+#[derive(Debug)]
 struct PantsColor(Color);
 
 impl PantsColor {
@@ -45,4 +51,22 @@ impl PantsColor {
         Self(color)
     }
 }
+
+// * Create a new type for each clothing item that wraps the Color enum
+//   * Each new type should implement a `new` function
+
+fn print_shirt_color(color: ShirtColor) {
+    println!("Shirt color = {:?}", color);
+}
+
+
+fn print_shoes_color(color: ShoesColor) {
+    println!("Shoes color = {:?}", color);
+}
+
+
+fn print_pants_color(color: PantsColor) {
+    println!("Pants color = {:?}", color);
+}
+
 fn main() {}
