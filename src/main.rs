@@ -55,26 +55,26 @@ impl PantsColor {
 // * Create a new type for each clothing item that wraps the Color enum
 //   * Each new type should implement a `new` function
 
-fn print_shirt_color(color: ShirtColor) {
+fn print_shirt_color(color: Color) {
     println!("Shirt color = {:?}", color);
 }
 
 
-fn print_shoes_color(color: ShoesColor) {
+fn print_shoes_color(color: Color) {
     println!("Shoes color = {:?}", color);
 }
 
 
-fn print_pants_color(color: PantsColor) {
+fn print_pants_color(color: Color) {
     println!("Pants color = {:?}", color);
 }
 
 fn main() {
-    let shirt_color = ShirtColor::new(Color::Gray);
-    let pants_color = PantsColor::new(Color::Blue);
-    let shoes_color = ShoesColor::new(Color::White);
+    let shirt_color = Color::Gray;
+    let pants_color = Color::Blue;
+    let shoes_color = Color::White;
 
-    print_shirt_color(shirt_color);
+    print_shirt_color(shoes_color);
     print_pants_color(pants_color);
-    print_shoes_color(shoes_color);
+    print_shoes_color(shirt_color);
 }
