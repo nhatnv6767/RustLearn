@@ -8,7 +8,7 @@
 struct NeverZero(i32);
 
 impl NeverZero {
-    fn new(i: i32) -> Result<Self, String> {
+    pub fn new(i: i32) -> Result<Self, String> {
         if i == 0 {
             Err("cannot be zero".to_string())
         } else {
@@ -17,6 +17,17 @@ impl NeverZero {
     }
 }
 
-fn divide(a: i32, b: NeverZero) -> i32 {}
+fn divide(a: i32, b: NeverZero) -> i32 {
+    // if recall from the lecture on typles to access the fields of the tuple
+    // just provide the index
+    // this is a typle structure and we only have one item and the index starts at zero
+    let b = b.0;
+    return a / b;
+}
 
-fn main() {}
+fn main() {
+    match NeverZero::new(5) {
+        Ok(nz) => println!("{:?}", divide(10, nz)),
+        Err(e) => println!("{:?}", e),
+    }
+}
