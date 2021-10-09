@@ -78,3 +78,6 @@ fn main() {
     print_pants_color(pants_color);
     print_shoes_color(shirt_color);
 }
+
+
+/// do like this, we will change the value in the line 77 -> 79
