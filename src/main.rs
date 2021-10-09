@@ -55,24 +55,24 @@ impl PantsColor {
 // * Create a new type for each clothing item that wraps the Color enum
 //   * Each new type should implement a `new` function
 
-fn print_shirt_color(color: Color) {
+fn print_shirt_color(color: ShirtColor) {
     println!("Shirt color = {:?}", color);
 }
 
 
-fn print_shoes_color(color: Color) {
+fn print_shoes_color(color: ShoesColor) {
     println!("Shoes color = {:?}", color);
 }
 
 
-fn print_pants_color(color: Color) {
+fn print_pants_color(color: PantsColor) {
     println!("Pants color = {:?}", color);
 }
 
 fn main() {
-    let shirt_color = Color::Gray;
-    let pants_color = Color::Blue;
-    let shoes_color = Color::White;
+    let shirt_color = ShoesColor::new(Color::Gray);
+    let pants_color = PantsColor::new(Color::Blue);
+    let shoes_color = ShoesColor::new(Color::White);
 
     print_shirt_color(shoes_color);
     print_pants_color(pants_color);
@@ -80,4 +80,4 @@ fn main() {
 }
 
 
-/// do like this, we will change the value in the line 77 -> 79
+// do like this, we will got the error because print_shirt_color just accept struct ShirtColor
