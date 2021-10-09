@@ -23,4 +23,8 @@ enum Color {
     Yellow,
 }
 
+// tuple structure, can be accessed with a .zero
+struct ShirtColor(Color);
+struct ShoesColor(Color);
+struct PantsColor(Color);
 fn main() {}
