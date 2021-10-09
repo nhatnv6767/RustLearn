@@ -25,6 +25,24 @@ enum Color {
 
 // tuple structure, can be accessed with a .zero
 struct ShirtColor(Color);
+
+impl ShirtColor {
+    fn new(color: Color) -> Self{
+        Self(color)
+    }
+}
 struct ShoesColor(Color);
+
+impl ShoesColor {
+    fn new(color: Color) -> Self{
+        Self(color)
+    }
+}
 struct PantsColor(Color);
+
+impl PantsColor {
+    fn new(color: Color) -> Self{
+        Self(color)
+    }
+}
 fn main() {}
