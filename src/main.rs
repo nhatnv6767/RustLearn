@@ -39,4 +39,18 @@ struct Records {
     inner: HashMap<i64, Record>
 }
 
+impl Records {
+    // Self is records
+    fn new() -> Self {
+        // create the records structure by using Self
+        Self {
+            inner: HashMap::new(),
+        }
+    }
+
+    fn add(&mut self, record: Record) {
+        self.inner.insert(record.id, record);
+    }
+}
+
 fn main() {}
