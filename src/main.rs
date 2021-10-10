@@ -56,7 +56,7 @@ impl Records {
 #[derive(Error, Debug)]
 enum ParseError {
     #[error("id must be a number: {0}")]
-    InvalidId(#[from] std::num::ParseIntError);
+    InvalidId(#[from] std::num::ParseIntError),
     #[error("empty record")]
     EmptyRecord,
     #[error("missing field: {0}")]
