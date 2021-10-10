@@ -27,6 +27,10 @@ use std::collections::HashMap;
 // * Make your program robust: there are 7 errors & multiple blank lines
 //   present in the data.
 
+use std::collections::HashMap;
+use std::io::Read;
+use std::thiserror::Error;
+
 #[derive(Debug)]
 struct Record {
     id: i64,
@@ -61,6 +65,20 @@ enum ParseError {
     EmptyRecord,
     #[error("missing field: {0}")]
     MissingField(String)
+}
+
+// PathBuf: used to work with paths to files, which is exactly what we need when we're working
+// with file data,
+// since it saves on our disk, it provides easy options for adding diẻctories, file extensions and file
+// return io results because we're going to be working with files and lots of thing can go wrong
+// and if everything goes right, we'll just return our records structure that we created earlier
+fn load_records(file_name: PathBuf, verbose: bool) -> std::io::Result<Records> {
+    let mut file = File::open(file_name)?;
+
+    let mut buffer = String::new();
+    file.read_to_string(&mut buffer)?;
+
+    Ok(parse_records(buffer, verbose))
 }
 
 fn main() {}
