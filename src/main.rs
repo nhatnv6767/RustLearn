@@ -67,6 +67,29 @@ enum ParseError {
     MissingField(String)
 }
 
+
+fn parse_records(records: String, verbose: bool) -> Records {
+    let mut recs = Records::new();
+    for (num, record) in records.split('\n').enumerate() {
+        if record != "" {
+            match parse_records(record) {
+                Ok(rec) => recs.add(rec),
+                Err(e) => {
+                    if verbose {
+                        println!(
+                            "error on line number {}: {}\n > \"{}\"\n",
+                            num + 1,
+                            e,
+                            record
+                        );
+                    }
+                }
+            }
+        }
+    }
+    return recs
+}
+
 // PathBuf: used to work with paths to files, which is exactly what we need when we're working
 // with file data,
 // since it saves on our disk, it provides easy options for adding diẻctories, file extensions and file
