@@ -90,6 +90,8 @@ fn parse_record(record: &str) -> Result<Record, ParseError> {
     };
     let email = fields.get(2).map(|email| email.to_string()).filter(|email| email != "");
     Ok(Record{id, name, email})
+
+
 }
 
 fn parse_records(records: String, verbose: bool) -> Records {
