@@ -70,7 +70,13 @@ enum ParseError {
 
 fn parse_records(records: String, verbose: bool) -> Records {
     let mut recs = Records::new();
+    // enumerate: provides us an index number of how many times we've
+    // gone through this for and loop, and it just returns a tuple
+    // the tuple is the current iteation number that we're on and then
+    // the data that we're iterating upon
+    // index: num
     for (num, record) in records.split('\n').enumerate() {
+        // ignore blank line
         if record != "" {
             match parse_records(record) {
                 Ok(rec) => recs.add(rec),
@@ -78,8 +84,11 @@ fn parse_records(records: String, verbose: bool) -> Records {
                     if verbose {
                         println!(
                             "error on line number {}: {}\n > \"{}\"\n",
+                            // line number start 0 (index)
                             num + 1,
                             e,
+                            // attempted to be passed but failed, and that would be
+                            // stored here on its own line
                             record
                         );
                     }
