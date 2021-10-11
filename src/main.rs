@@ -66,10 +66,21 @@ enum ParseError {
     #[error("missing field: {0}")]
     MissingField(String)
 }
-
+// parse_record takes a record,
 fn parse_record(record: &str) -> Result<Record, ParseError> {
+    // ',' in our data we have each field separated by a comma
+    // then going to collect all those pieces of data into a vector of &str
+    // that we have a variable name filed
     let fields: Vec<&str> = record.split(',').collect();
+    // trying to get the first field, which is field number zero
+    // when working with vectors or most things with programming, the indexes always start at zero
     let id = match fields.get(0) {
+        // here we have id, then try to convert the string representation
+        // of the id into a number we can work with
+        // mean: convert a string into a number and the radix part is 10
+        // we're using base 10, like just decimal numbers
+        // ?: if it failds, which it will in many cases, it's automatically going to return a pass error
+        //and the variant will be the invalid ID, because this function returns a ParseError
         Some(id) => i64::from_str_radix(id, 10)?,
         None => return Err(ParseError::EmptyRecord),
     };
