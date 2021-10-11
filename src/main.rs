@@ -67,6 +67,19 @@ enum ParseError {
     MissingField(String)
 }
 
+fn parse_record(record: &str) -> Result<Record, ParseError> {
+    let fields: Vec<&str> = record.split(',').collect();
+    let id = match fields.get(0) {
+        Some(id) => i64::from_str_radix(id, 10)?,
+        None => return Err(ParseError::EmptyRecord),
+    };
+    let name = match fields.get(1).filter(|name| **name != "") {
+        Some(name) => name.to_string(),
+        None => return Err(ParseError::MissingField("name".to_owned())),
+    };
+    let email = fields.get(2).map(|email| email.to_string()).filter(|email| email != "");
+    Ok(Record{id, name, email})
+}
 
 fn parse_records(records: String, verbose: bool) -> Records {
     let mut recs = Records::new();
