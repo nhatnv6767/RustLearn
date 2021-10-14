@@ -169,4 +169,9 @@ struct Opt {
     verbose: bool,
 }
 
+#[derive(StructOpt, Debug)]
+enum Command {
+    List{}
+}
+
 fn main() {}
