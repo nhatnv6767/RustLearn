@@ -171,6 +171,7 @@ struct Opt {
 
 #[derive(StructOpt, Debug)]
 enum Command {
+    // structopt(subcommand)
     List{}
 }
 
