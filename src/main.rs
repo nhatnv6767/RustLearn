@@ -28,8 +28,11 @@ use std::collections::HashMap;
 //   present in the data.
 
 use std::collections::HashMap;
-use std::io::Read;
 use std::thiserror::Error;
+use std::path::PathBuf;
+use std::io::(Read, Write);
+
+use structopt::StructOpt;
 
 #[derive(Debug)]
 struct Record {
