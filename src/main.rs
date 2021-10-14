@@ -28,6 +28,7 @@ use std::collections::HashMap;
 //   present in the data.
 
 use std::collections::HashMap;
+use std::process::Command;
 use std::thiserror::Error;
 use std::path::PathBuf;
 use std::io::(Read, Write);
@@ -151,6 +152,21 @@ fn load_records(file_name: PathBuf, verbose: bool) -> std::io::Result<Records> {
     file.read_to_string(&mut buffer)?;
 
     Ok(parse_records(buffer, verbose))
+}
+
+// automatically implement all the functionality needed in order to
+// create our command line program
+#[derive(StructOpt, Debug)]
+#[structopt(about = "project 2: contact manager")]
+struct Opt {
+    #[structopt(short, parse(from_os_str), default_value = "p2_data.csv")]
+    // specify the data file we're using
+    data_file: PathBuf,
+    // allow us to have additional commands such as edit, add list, etc
+    #[structopt(subcommand)]
+    cmd: Command,
+    #[structopt(short, help = "verbose")]
+    verbose: bool,
 }
 
 fn main() {}
