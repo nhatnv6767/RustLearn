@@ -35,12 +35,12 @@ use std::thiserror::Error;
 struct Record {
     id: i64,
     name: String,
-    email: Option<String>
+    email: Option<String>,
 }
 
 #[derive(Debug)]
 struct Records {
-    inner: HashMap<i64, Record>
+    inner: HashMap<i64, Record>,
 }
 
 impl Records {
@@ -64,7 +64,7 @@ enum ParseError {
     #[error("empty record")]
     EmptyRecord,
     #[error("missing field: {0}")]
-    MissingField(String)
+    MissingField(String),
 }
 // parse_record takes a record,
 fn parse_record(record: &str) -> Result<Record, ParseError> {
@@ -84,14 +84,25 @@ fn parse_record(record: &str) -> Result<Record, ParseError> {
         Some(id) => i64::from_str_radix(id, 10)?,
         None => return Err(ParseError::EmptyRecord),
     };
+    // get (1): next item, the name of contact
+    // if the name is blank, then it's going to get filtered out
+    // ----  **: because our vector first has our reference to a string
+    // when we do get, we get another reference, so it'll have to ampersands
+    // and finally, when we call .filter, this will be referenced again
+    // So we have to do is dereference it twice using two ** and the string is already has one reference
     let name = match fields.get(1).filter(|name| **name != "") {
+        // if we do find a name, then we just convert it into an old string, by .to_string()
         Some(name) => name.to_string(),
+        // if we dont find a name, then we return a pass error and we just say that
+        // we're missing the name
         None => return Err(ParseError::MissingField("name".to_owned())),
     };
-    let email = fields.get(2).map(|email| email.to_string()).filter(|email| email != "");
-    Ok(Record{id, name, email})
 
-
+    let email = fields
+        .get(2)
+        .map(|email| email.to_string())
+        .filter(|email| email != "");
+    Ok(Record { id, name, email })
 }
 
 fn parse_records(records: String, verbose: bool) -> Records {
@@ -122,7 +133,7 @@ fn parse_records(records: String, verbose: bool) -> Records {
             }
         }
     }
-    return recs
+    return recs;
 }
 
 // PathBuf: used to work with paths to files, which is exactly what we need when we're working
