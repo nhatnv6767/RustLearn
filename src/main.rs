@@ -59,6 +59,13 @@ impl Records {
     fn add(&mut self, record: Record) {
         self.inner.insert(record.id, record);
     }
+    // mut: not borrowing
+    fn into_vec(mut self) -> Vec<Record> {
+        // drain: go through the hash map and it will drain all the values into something else, and .1 to get the value
+        let mut records: Vec<_> = self.inner.drain().map(|kv| kv.1).collect();
+        records.sort_by_key(|rec| rec.id);
+        return records;
+    }
 }
 
 #[derive(Error, Debug)]
