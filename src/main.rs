@@ -221,6 +221,9 @@ enum Command {
     },
     // structopt(subcommand)
     List {},
+    Search {
+        query: String,
+    },
 }
 
 fn run(opt: Opt) -> Result<(), std::io::Error> {
@@ -244,6 +247,8 @@ fn run(opt: Opt) -> Result<(), std::io::Error> {
                 println!("{:?}", record);
             }
         }
+
+
     }
 
     Ok(())
