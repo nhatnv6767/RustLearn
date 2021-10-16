@@ -27,12 +27,11 @@
 
 use std::collections::HashMap;
 use std::fs::{File, OpenOptions};
-// use std::process::Command;
 use std::io::{Read, Write};
 use std::path::PathBuf;
+use structopt::StructOpt;
 use std::thiserror::Error;
 
-use structopt::StructOpt;
 
 #[derive(Debug)]
 struct Record {
@@ -93,6 +92,7 @@ fn save_records(file_name: PathBuf, records: Records) -> std::io::Result<()> {
         let line = format!("{},{},{}\n", record.id, record.name, email);
         file.write(line.as_bytes())?;
     }
+    // makes a request to the system and it won't return until the system has successfully written the data
     file.flush()?;
     Ok(())
 }
@@ -222,6 +222,8 @@ fn run(opt: Opt) -> Result<(), std::io::Error> {
             }
         }
     }
+
+    Ok(())
 }
 
 fn main() {
