@@ -1,4 +1,3 @@
-use std::collections::HashMap;
 
 // Project 2: Contact manager
 //
@@ -28,10 +27,11 @@ use std::collections::HashMap;
 //   present in the data.
 
 use std::collections::HashMap;
-use std::process::Command;
+use std::fs::File;
+// use std::process::Command;
 use std::thiserror::Error;
 use std::path::PathBuf;
-use std::io::(Read, Write);
+use std::io::{Read, Write};
 
 use structopt::StructOpt;
 
