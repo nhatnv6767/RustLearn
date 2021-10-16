@@ -29,8 +29,8 @@ use std::collections::HashMap;
 use std::fs::{File, OpenOptions};
 use std::io::{Read, Write};
 use std::path::PathBuf;
-use thiserror::Error;
 use structopt::StructOpt;
+use thiserror::Error;
 
 #[derive(Debug)]
 struct Record {
@@ -56,6 +56,18 @@ impl Records {
     fn add(&mut self, record: Record) {
         self.inner.insert(record.id, record);
     }
+
+    fn edit(&mut self, id: i64, name: &str, email: Option<String>) {
+        self.inner.insert(
+            id,
+            Record {
+                id,
+                name: name.to_string(),
+                email,
+            },
+        );
+    }
+
     // mut: not borrowing
     fn into_vec(mut self) -> Vec<Record> {
         // drain: go through the hash map and it will drain all the values into something else, and .1 to get the value
