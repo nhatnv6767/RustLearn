@@ -248,7 +248,17 @@ fn run(opt: Opt) -> Result<(), std::io::Error> {
             }
         }
 
-
+        Command::Search { query } => {
+            let recs = load_records(opt.data_file, opt.verbose)?;
+            let results = recs.search(&query);
+            if results.is_empty() {
+                println!("No records found");
+            } else {
+                for rec in results {
+                    println!("{:?}", rec);
+                }
+            }
+        }
     }
 
     Ok(())
