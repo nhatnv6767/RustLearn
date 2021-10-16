@@ -208,12 +208,29 @@ struct Opt {
 
 #[derive(StructOpt, Debug)]
 enum Command {
+    Add {
+        name: String,
+        #[structopt(short)]
+        email: Option<String>,
+    },
     // structopt(subcommand)
     List {},
 }
 
 fn run(opt: Opt) -> Result<(), std::io::Error> {
     match opt.cmd {
+
+        Command::Add { name, email } => {
+            let mut recs = load_records(opt.data_file.clone(), opt.verbose)?;
+            let next_id = recs.next_id();
+            recs.add(Record {
+                id: next_id,
+                name,
+                email,
+            });
+            save_records(opt.data_file, recs)?;
+        }
+
         // .. nothing inside
         Command::List { .. } => {
             let recs = load_records(opt.data_file, opt.verbose)?;
