@@ -235,6 +235,12 @@ enum Command {
         #[structopt(short)]
         email: Option<String>,
     },
+    Edit {
+        id: i64,
+        name: String,
+        #[structopt(short)]
+        email: Option<String>,
+    },
     // structopt(subcommand)
     List {},
     Remove {
