@@ -29,7 +29,7 @@ use std::collections::HashMap;
 use std::fs::{File, OpenOptions};
 use std::io::{Read, Write};
 use std::path::PathBuf;
-use std::thiserror::Error;
+use thiserror::Error;
 use structopt::StructOpt;
 
 #[derive(Debug)]
