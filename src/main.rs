@@ -1,4 +1,3 @@
-
 // Project 2: Contact manager
 //
 // User stories:
@@ -27,11 +26,11 @@
 //   present in the data.
 
 use std::collections::HashMap;
-use std::fs::File;
+use std::fs::{File, OpenOptions};
 // use std::process::Command;
-use std::thiserror::Error;
-use std::path::PathBuf;
 use std::io::{Read, Write};
+use std::path::PathBuf;
+use std::thiserror::Error;
 
 use structopt::StructOpt;
 
@@ -66,6 +65,36 @@ impl Records {
         records.sort_by_key(|rec| rec.id);
         return records;
     }
+    // go through current records and determines which next id should be generated
+    fn next_id(&self) -> i64 {
+        // .keys get all of the keys from hash map
+        let mut ids: Vec<_> = self.inner.keys().collect();
+        ids.sort();
+        match ids.pop() {
+            Some(id) => id + 1,
+            None => 1,
+        }
+    }
+}
+
+fn save_records(file_name: PathBuf, records: Records) -> std::io::Result<()> {
+    let mut file = OpenOptions::new()
+        .write(true)
+        .truncate(true)
+        .open(file_name)?;
+
+    file.write(b"id,name,email\n")?;
+
+    for record in records.into_vec().into_iter() {
+        let email = match record.email {
+            Some(email) => email,
+            None => "".to_string(),
+        };
+        let line = format!("{},{},{}\n", record.id, record.name, email);
+        file.write(line.as_bytes())?;
+    }
+    file.flush()?;
+    Ok(())
 }
 
 #[derive(Error, Debug)]
@@ -180,7 +209,7 @@ struct Opt {
 #[derive(StructOpt, Debug)]
 enum Command {
     // structopt(subcommand)
-    List{}
+    List {},
 }
 
 fn run(opt: Opt) -> Result<(), std::io::Error> {
