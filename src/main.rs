@@ -29,9 +29,8 @@ use std::collections::HashMap;
 use std::fs::{File, OpenOptions};
 use std::io::{Read, Write};
 use std::path::PathBuf;
-use structopt::StructOpt;
 use std::thiserror::Error;
-
+use structopt::StructOpt;
 
 #[derive(Debug)]
 struct Record {
@@ -73,6 +72,13 @@ impl Records {
             Some(id) => id + 1,
             None => 1,
         }
+    }
+
+    fn search(&self, name: &str) -> Vec<&Record> {
+        self.inner
+            .values()
+            .filter(|rec| rec.name.to_lowercase().contains(&name.to_lowercase()))
+            .collect()
     }
 }
 
@@ -219,9 +225,9 @@ enum Command {
 
 fn run(opt: Opt) -> Result<(), std::io::Error> {
     match opt.cmd {
-
         Command::Add { name, email } => {
             let mut recs = load_records(opt.data_file.clone(), opt.verbose)?;
+            // generate a new id
             let next_id = recs.next_id();
             recs.add(Record {
                 id: next_id,
