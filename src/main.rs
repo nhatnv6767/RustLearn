@@ -225,6 +225,9 @@ enum Command {
     },
     // structopt(subcommand)
     List {},
+    Remove {
+        id: i64,
+    },
     Search {
         query: String,
     },
@@ -249,6 +252,16 @@ fn run(opt: Opt) -> Result<(), std::io::Error> {
             let recs = load_records(opt.data_file, opt.verbose)?;
             for record in recs.into_vec() {
                 println!("{:?}", record);
+            }
+        }
+
+        Command::Remove { id } => {
+            let mut recs = load_records(opt.data_file.clone(), opt.verbose)?;
+            if recs.remove(id).is_some() {
+                save_records(opt.data_file, recs)?;
+                println!("Record deleted");
+            } else {
+                println!("Record not found");
             }
         }
 
