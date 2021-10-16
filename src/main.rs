@@ -80,6 +80,10 @@ impl Records {
             .filter(|rec| rec.name.to_lowercase().contains(&name.to_lowercase()))
             .collect()
     }
+
+    fn remove(&mut self, id: i64) -> Option<Record> {
+        self.inner.remove(&id)
+    }
 }
 
 fn save_records(file_name: PathBuf, records: Records) -> std::io::Result<()> {
