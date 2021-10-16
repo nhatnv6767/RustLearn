@@ -166,6 +166,7 @@ struct Opt {
     #[structopt(subcommand)]
     cmd: Command,
     #[structopt(short, help = "verbose")]
+    // default to false
     verbose: bool,
 }
 
@@ -175,4 +176,21 @@ enum Command {
     List{}
 }
 
-fn main() {}
+fn run(opt: Opt) -> Result<(), std::io::Error> {
+    match opt.cmd {
+        // .. nothing inside
+        Command::List { .. } => {
+            let recs = load_records(opt.data_file, opt.verbose)?;
+            for record in recs.into_vec() {
+                println!("{:?}", record);
+            }
+        }
+    }
+}
+
+fn main() {
+    let opt = Opt::from_args();
+    if let Err(e) = run(opt) {
+        println!("An error occured: {}", e);
+    }
+}
