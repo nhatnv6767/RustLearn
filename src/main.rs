@@ -265,6 +265,12 @@ fn run(opt: Opt) -> Result<(), std::io::Error> {
             save_records(opt.data_file, recs)?;
         }
 
+        Command::Edit { id, name, email } => {
+            let mut recs = load_records(opt.data_file.clone(), opt.verbose)?;
+            recs.edit(id, &name, email);
+            save_records(opt.data_file, recs)?;
+        }
+
         // .. nothing inside
         Command::List { .. } => {
             let recs = load_records(opt.data_file, opt.verbose)?;
