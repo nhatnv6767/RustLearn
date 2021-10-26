@@ -4,7 +4,9 @@
 // we're passing in a simple style closure,
 // we dont define any variable names for these arguments
 // we only need to supply the data type and then we have the return value
-fn math(a: i32, b: i32, op: Box<Fn(i32, i32) -> i32>) -> i32 {
+// dyn: Dynamic:signifies to the compiler that this data could potentially be different things
+// dyn: you might get multiple different kinds that are in this box instead of
+fn math(a: i32, b: i32, op: Box<dyn Fn(i32, i32) -> i32>) -> i32 {
     // return operation was performed
     op(a, b)
 }
