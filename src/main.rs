@@ -12,7 +12,15 @@ fn math(a: i32, b: i32, op: Box<dyn Fn(i32, i32) -> i32>) -> i32 {
 }
 
 fn main() {
+    // create closure: accept a and b, then returns the a value plus the b value
     let add = |a, b| a + b;
+    // saving this closure into a Box
+    // do this in order to be able to call the closure from a function
+    // because the function parameters need to have a known size
+    // Closure sizes can veri from smal to large, and in order to call functions, we have to know exactly
+    // what the size of the function argument is
+    // when we place the closure into a box, the box is always guaranteed to be the same size as a pointer, which
+    // is the size of a memory address
     let add = Box::new(add);
     println!("{}", math(2, 2, add));
 }
